@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Binary folder
+bin/
+bin-int/
