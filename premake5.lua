@@ -20,6 +20,11 @@ project "Engine"
       "%{prj.name}/src/**.cpp",
    }
 
+   includedirs
+   {
+      "%{prj.name}/vendor/spdlog/include", 
+   }
+
    filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
@@ -46,6 +51,7 @@ project "Sandbox"
    includedirs
    {
       "Engine",
+      "Engine/vendor/spdlog/include", 
    }
 
    links
