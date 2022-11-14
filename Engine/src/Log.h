@@ -1,13 +1,15 @@
 #pragma once
 
-#include <memory>
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
+#include "Core.h"
+
+#include <memory>
 
 namespace Engine
 {
 
-    class Log
+    class ENGINE_API Log
     {
     private:
         static std::shared_ptr<spdlog::logger> s_CoreLogger;
