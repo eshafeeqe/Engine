@@ -48,5 +48,22 @@
         "typeinfo": "cpp",
         "utility": "cpp"
     },
-    "ros.distro": "noetic"
+    "ros.distro": "noetic",
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/opt/openrobots/lib/python3.8/site-packages",
+        "/opt/openrobots/lib/python3.8/site-packages"
+    ],
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/elan/personal/Dev/bin/Debug-linux-x86_64/Sandbox",
+            "binaryPath": "/home/elan/personal/Dev/bin/Debug-linux-x86_64/Sandbox/Sandbox",
+            "binaryArgs": []
+        }
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/opt/openrobots/lib/python3.8/site-packages",
+        "/opt/openrobots/lib/python3.8/site-packages"
+    ]
 }
