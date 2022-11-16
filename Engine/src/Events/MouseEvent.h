@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "Engine/src/Core.h"
+#include "../Core.h"
 
 #include "sstream"
 
@@ -113,8 +113,6 @@ namespace Engine
         }
 
         EVENT_CLASS_TYPE(MouseButtonReleased)
-
-    
 
     };
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/src/Core.h"
+#include "../Core.h"
 
 #include <string>
 #include <functional>
@@ -27,7 +27,7 @@ namespace Engine
         EventCategoryMouseButton    =  BIT(4),
     };
 
-    #define EVENT_CLASS_TYPE(type) static EventType GetStaticType(){ return EventType::##type; }\
+    #define EVENT_CLASS_TYPE(type) static EventType GetStaticType(){ return EventType::type; }\
                                    virtual EventType GetEventType () const override { return GetStaticType();}\
                                    virtual const char* GetName() const override { return  #type;}
                                 
@@ -41,7 +41,7 @@ namespace Engine
             virtual EventType GetEventType() const = 0;
             virtual const char* GetName() const = 0;
             virtual int GetCategoryFlags() const = 0;
-            virtual std::string ToString() const = { return GetName();}
+            virtual std::string ToString() const { return GetName();}
 
             inline bool IsInCategory (EventCategory category)
             {
@@ -56,9 +56,35 @@ namespace Engine
     class EventDispatcher
     {
 
+        template<typename T>
+        using EventFn = std::function<bool(T&)>;
+
+        public:
+            EventDispatcher(Event& event)
+            : m_Event(event) {}
+        
+            template<typename T>
+            bool Dispatch(EventFn<T> func)
+            {
+                if(m_Event.GetEventType() ==  T::GetStaticType())
+                {
+                    m_Event.m_Handled = func(*(T*)&m_Event);
+                    return true;
+                }
+                return false;
+            }
+
+
+        private:
+            Event& m_Event;
+
 
     };
 
+    inline std::ostream& operator<<(std::ostream& os, const Event& e )
+    {
+        return os << e.ToString();
+    }
 
 }
 

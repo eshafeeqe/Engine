@@ -4,7 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "${workspaceFolder}/Engine/src/**",
+                "${workspaceFolder}/Engine/src/Events/**",
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
