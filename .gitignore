@@ -34,3 +34,4 @@
 # Binary folder
 bin/
 bin-int/
+.history/*
