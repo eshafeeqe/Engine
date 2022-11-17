@@ -16,7 +16,7 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libEngine.so
   OBJDIR = ../bin-int/Debug-linux-x86_64/Engine
   DEFINES += -DDEBUG -DNDEBUG
-  INCLUDES += -Ivendor/spdlog/include
+  INCLUDES += -Isrc -Ivendor/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -g
@@ -43,7 +43,7 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libEngine.so
   OBJDIR = ../bin-int/Release-linux-x86_64/Engine
   DEFINES +=
-  INCLUDES += -Ivendor/spdlog/include
+  INCLUDES += -Isrc -Ivendor/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC
