@@ -5,8 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}",
-                "${workspaceFolder}/Engine/src/**",
-                "${workspaceFolder}/Engine/src/Events/**",
+                "${workspaceFolder}/Engine/src/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
