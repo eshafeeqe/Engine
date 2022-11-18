@@ -23,7 +23,7 @@ ifeq ($(config),debug)
   TARGETDIR = ../bin/Debug-linux-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Debug-linux-x86_64/Sandbox
-  DEFINES += -DEG_DEBUG -DEG_ENABLE_ASSERTS
+  DEFINES += -DEG_DEBUG
   INCLUDES += -I../Engine/src -I../Engine/vendor/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)

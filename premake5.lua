@@ -39,14 +39,16 @@ project "Engine"
 
    links
    {
-      "GLFW"
+      "GLFW",
+      "pthread", "dl"
    }
 
    filter "configurations:Debug"
-      defines { "DEBUG" }
+      defines { "EG_DEBUG"}
       symbols "On"
 
-      defines { "NDEBUG" }
+   filter "configurations:Release"
+      defines { "EG_RELEASE" }
       optimize "On"
 
 project "Sandbox"
@@ -77,7 +79,7 @@ project "Sandbox"
    }
 
    filter "configurations:Debug"
-      defines { "EG_DEBUG", "EG_ENABLE_ASSERTS"}
+      defines { "EG_DEBUG"}
       symbols "On"
 
    filter "configurations:Release"
