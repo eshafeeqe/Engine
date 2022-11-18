@@ -1,5 +1,7 @@
 #pragma once
 
+#include "egpch.h"
+
 #include "Core.h"
 
 namespace Engine

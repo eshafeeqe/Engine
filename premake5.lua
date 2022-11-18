@@ -2,6 +2,7 @@
 workspace "Engine"
    architecture "x64"
    configurations { "Debug", "Release" }
+   toolset ("clang")
 
 outputdir = "/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -9,8 +10,11 @@ project "Engine"
    location "Engine"
    kind "SharedLib"
    language "C++"
+
    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+   pchheader "egpch.h"
 
    cppdialect "C++17"
 
@@ -22,6 +26,7 @@ project "Engine"
 
    includedirs
    {
+      "%{prj.name}",
       "%{prj.name}/src",
       "%{prj.name}/vendor/spdlog/include", 
    }

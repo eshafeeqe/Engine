@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "egpch.h"
 
 extern Engine::Application* CreateApplication();
 
