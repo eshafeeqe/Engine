@@ -6,6 +6,7 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}",
                 "${workspaceFolder}/Engine/src/**"
+                "${workspaceFolder}/Engine/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

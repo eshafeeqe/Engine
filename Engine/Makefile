@@ -11,13 +11,23 @@ endif
 .PHONY: clean prebuild prelink
 
 ifeq ($(config),debug)
-  RESCOMP = windres
+  ifeq ($(origin CC), default)
+    CC = clang
+  endif
+  ifeq ($(origin CXX), default)
+    CXX = clang++
+  endif
+  ifeq ($(origin AR), default)
+    AR = ar
+  endif
   TARGETDIR = ../bin/Debug-linux-x86_64/Engine
   TARGET = $(TARGETDIR)/libEngine.so
   OBJDIR = ../bin-int/Debug-linux-x86_64/Engine
+  PCH = egpch.h
+  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES += -DDEBUG -DNDEBUG
-  INCLUDES += -Isrc -Ivendor/spdlog/include
-  FORCE_INCLUDE +=
+  INCLUDES += -I. -Isrc -Ivendor/spdlog/include
+  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -g -std=c++17
@@ -38,20 +48,30 @@ all: prebuild prelink $(TARGET)
 endif
 
 ifeq ($(config),release)
-  RESCOMP = windres
+  ifeq ($(origin CC), default)
+    CC = clang
+  endif
+  ifeq ($(origin CXX), default)
+    CXX = clang++
+  endif
+  ifeq ($(origin AR), default)
+    AR = ar
+  endif
   TARGETDIR = ../bin/Release-linux-x86_64/Engine
   TARGET = $(TARGETDIR)/libEngine.so
   OBJDIR = ../bin-int/Release-linux-x86_64/Engine
+  PCH = egpch.h
+  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES +=
-  INCLUDES += -Isrc -Ivendor/spdlog/include
-  FORCE_INCLUDE +=
+  INCLUDES += -I. -Isrc -Ivendor/spdlog/include
+  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so -s
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef

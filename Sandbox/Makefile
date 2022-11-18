@@ -11,7 +11,15 @@ endif
 .PHONY: clean prebuild prelink
 
 ifeq ($(config),debug)
-  RESCOMP = windres
+  ifeq ($(origin CC), default)
+    CC = clang
+  endif
+  ifeq ($(origin CXX), default)
+    CXX = clang++
+  endif
+  ifeq ($(origin AR), default)
+    AR = ar
+  endif
   TARGETDIR = ../bin/Debug-linux-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Debug-linux-x86_64/Sandbox
@@ -38,7 +46,15 @@ all: prebuild prelink $(TARGET)
 endif
 
 ifeq ($(config),release)
-  RESCOMP = windres
+  ifeq ($(origin CC), default)
+    CC = clang
+  endif
+  ifeq ($(origin CXX), default)
+    CXX = clang++
+  endif
+  ifeq ($(origin AR), default)
+    AR = ar
+  endif
   TARGETDIR = ../bin/Release-linux-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Release-linux-x86_64/Sandbox
@@ -51,7 +67,7 @@ ifeq ($(config),release)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../bin/Release-linux-x86_64/Engine/libEngine.so
   LDDEPS += ../bin/Release-linux-x86_64/Engine/libEngine.so
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Engine' -m64 -s
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Engine' -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
