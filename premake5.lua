@@ -6,6 +6,11 @@ workspace "Engine"
 
 outputdir = "/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+
+include "Engine/vendor/GLFW"
+
 project "Engine"
    location "Engine"
    kind "SharedLib"
@@ -28,7 +33,13 @@ project "Engine"
    {
       "%{prj.name}",
       "%{prj.name}/src",
-      "%{prj.name}/vendor/spdlog/include", 
+      "%{prj.name}/vendor/spdlog/include",
+      "%{IncludeDir.GLFW}" 
+   }
+
+   links
+   {
+      "GLFW"
    }
 
    filter "configurations:Debug"
@@ -56,7 +67,7 @@ project "Sandbox"
 
    includedirs
    {
-      "Engine",
+      "Engine/src",
       "Engine/vendor/spdlog/include", 
    }
 
@@ -66,9 +77,9 @@ project "Sandbox"
    }
 
    filter "configurations:Debug"
-      defines { "DEBUG" }
+      defines { "EG_DEBUG", "EG_ENABLE_ASSERTS"}
       symbols "On"
 
    filter "configurations:Release"
-      defines { "NDEBUG" }
+      defines { "EG_RELEASE" }
       optimize "On"

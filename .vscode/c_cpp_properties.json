@@ -5,8 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}",
-                "${workspaceFolder}/Engine/src/**"
-                "${workspaceFolder}/Engine/**"
+                "${workspaceFolder}/Engine/src/**",
+                "${workspaceFolder}/Engine/**",
+                "${workspaceFolder}/Engine"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
