@@ -65,5 +65,13 @@
         "/opt/ros/noetic/lib/python3/dist-packages",
         "/opt/openrobots/lib/python3.8/site-packages",
         "/opt/openrobots/lib/python3.8/site-packages"
-    ]
+    ],
+
+    "files.exclude": {
+        "**/.git": true,        
+        "**/.DS_Store": true,   
+
+        ".history": true,                          
+    },
+    "cmake.configureOnOpen": false
 }

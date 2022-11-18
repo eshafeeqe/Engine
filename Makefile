@@ -11,21 +11,29 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug)
+  GLFW_config = debug
   Engine_config = debug
   Sandbox_config = debug
 endif
 ifeq ($(config),release)
+  GLFW_config = release
   Engine_config = release
   Sandbox_config = release
 endif
 
-PROJECTS := Engine Sandbox
+PROJECTS := GLFW Engine Sandbox
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-Engine:
+GLFW:
+ifneq (,$(GLFW_config))
+	@echo "==== Building GLFW ($(GLFW_config)) ===="
+	@${MAKE} --no-print-directory -C Engine/vendor/GLFW -f Makefile config=$(GLFW_config)
+endif
+
+Engine: GLFW
 ifneq (,$(Engine_config))
 	@echo "==== Building Engine ($(Engine_config)) ===="
 	@${MAKE} --no-print-directory -C Engine -f Makefile config=$(Engine_config)
@@ -38,6 +46,7 @@ ifneq (,$(Sandbox_config))
 endif
 
 clean:
+	@${MAKE} --no-print-directory -C Engine/vendor/GLFW -f Makefile clean
 	@${MAKE} --no-print-directory -C Engine -f Makefile clean
 	@${MAKE} --no-print-directory -C Sandbox -f Makefile clean
 
@@ -51,6 +60,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   GLFW"
 	@echo "   Engine"
 	@echo "   Sandbox"
 	@echo ""

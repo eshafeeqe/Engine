@@ -26,14 +26,14 @@ ifeq ($(config),debug)
   PCH = egpch.h
   GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES += -DDEBUG -DNDEBUG
-  INCLUDES += -I. -Isrc -Ivendor/spdlog/include
+  INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/GLFW/include
   FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -g -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
+  LIBS += vendor/GLFW/bin/Debug-linux-x86_64/GLFW/libGLFW.a
+  LDDEPS += vendor/GLFW/bin/Debug-linux-x86_64/GLFW/libGLFW.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -63,14 +63,14 @@ ifeq ($(config),release)
   PCH = egpch.h
   GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES +=
-  INCLUDES += -I. -Isrc -Ivendor/spdlog/include
+  INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/GLFW/include
   FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
+  LIBS += vendor/GLFW/bin/Release-linux-x86_64/GLFW/libGLFW.a
+  LDDEPS += vendor/GLFW/bin/Release-linux-x86_64/GLFW/libGLFW.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -87,6 +87,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/Application.o \
 	$(OBJDIR)/Log.o \
+	$(OBJDIR)/LinuxWindow.o \
 
 RESOURCES := \
 
@@ -145,10 +146,13 @@ else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/Application.o: src/Application.cpp
+$(OBJDIR)/Application.o: src/Engine/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Log.o: src/Log.cpp
+$(OBJDIR)/Log.o: src/Engine/Log.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LinuxWindow.o: src/Platform/Linux/LinuxWindow.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

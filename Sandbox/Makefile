@@ -23,8 +23,8 @@ ifeq ($(config),debug)
   TARGETDIR = ../bin/Debug-linux-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Debug-linux-x86_64/Sandbox
-  DEFINES += -DDEBUG
-  INCLUDES += -I../Engine -I../Engine/vendor/spdlog/include
+  DEFINES += -DEG_DEBUG -DEG_ENABLE_ASSERTS
+  INCLUDES += -I../Engine/src -I../Engine/vendor/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
@@ -58,8 +58,8 @@ ifeq ($(config),release)
   TARGETDIR = ../bin/Release-linux-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Release-linux-x86_64/Sandbox
-  DEFINES += -DNDEBUG
-  INCLUDES += -I../Engine -I../Engine/vendor/spdlog/include
+  DEFINES += -DEG_RELEASE
+  INCLUDES += -I../Engine/src -I../Engine/vendor/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
