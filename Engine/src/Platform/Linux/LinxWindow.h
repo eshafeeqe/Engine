@@ -42,7 +42,7 @@ namespace Engine
         };
         
         WindowData m_Data;
-    }
+    };
 
 
 }
