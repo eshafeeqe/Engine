@@ -1,5 +1,5 @@
 
-#include "Application.h"
+#include "Engine/Application.h"
 
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
@@ -9,7 +9,7 @@ namespace Engine
  
     Application::Application()
     {
-        m_Window = std::unique_ptr<Window>(Window::Create());
+        m_Window = Window::Create();
     }
 
     Application::~Application()
