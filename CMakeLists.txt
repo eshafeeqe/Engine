@@ -19,7 +19,7 @@ SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
 SET(ENGINE_SRCS_PATH     "${PROJECT_SOURCE_DIR}/Engine/src")
 SET(SPDLOG_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/spdlog/include")
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw/GLFW)
+add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw)
 
 INCLUDE_DIRECTORIES(${SPDLOG_INCLUDE_PATH})
 
