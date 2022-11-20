@@ -78,5 +78,6 @@
 
         ".history": true,                          
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "${workspaceFolder}/."
 }
