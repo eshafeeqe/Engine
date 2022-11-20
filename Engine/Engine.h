@@ -2,10 +2,10 @@
 
 // For use by Engine applications
 
-#include "src/Application.h"
-#include "src/Log.h"
+#include "Engine/Application.h"
+#include "Engine/Log.h"
 
 //------Entry point --------------
 
-#include "src/EntryPoint.h"
+#include "Engine/EntryPoint.h"
 //------ -------------------------

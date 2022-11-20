@@ -4,9 +4,9 @@ namespace Engine {
 
     static bool s_GLFWInitialized = false;
 
-    Window* Window::Create(const WindowProps& props)
+    std::unique_ptr<Window> Window::Create(const WindowProps& props)
     {
-        return new LinuxWindow(props);
+        return std::make_unique<LinuxWindow>(props);
     }
 
     LinuxWindow::LinuxWindow(const WindowProps& props)

@@ -59,6 +59,11 @@
             "cwd": "/home/elan/personal/Dev/bin/Debug-linux-x86_64/Sandbox",
             "binaryPath": "/home/elan/personal/Dev/bin/Debug-linux-x86_64/Sandbox/Sandbox",
             "binaryArgs": []
+        },
+        {
+            "cwd": "/home/elan/Dev/bin/Debug-linux-x86_64/Sandbox",
+            "binaryPath": "/home/elan/Dev/bin/Debug-linux-x86_64/Sandbox/Sandbox",
+            "binaryArgs": []
         }
     ],
     "python.analysis.extraPaths": [
@@ -73,5 +78,6 @@
 
         ".history": true,                          
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "${workspaceFolder}/."
 }
