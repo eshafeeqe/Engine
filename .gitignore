@@ -31,7 +31,11 @@
 *.out
 *.app
 
+
+*.log
+
 # Binary folder
 bin/
 bin-int/
 .history/*
+build/*
