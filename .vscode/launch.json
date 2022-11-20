@@ -4,7 +4,7 @@
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/bin/Debug-linux-x86_64/Sandbox/Sandbox",
+        "program": "${workspaceFolder}/bin/Sandbox/Sandbox",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
