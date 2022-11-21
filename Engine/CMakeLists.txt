@@ -18,12 +18,13 @@ SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
 
 SET(ENGINE_SRCS_PATH     "${PROJECT_SOURCE_DIR}/Engine/src")
 SET(SPDLOG_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/spdlog/include")
+SET(ENGINE_PCH "${PROJECT_SOURCE_DIR}/Engine/src/egpch.h")
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw/GLFW)
 
 INCLUDE_DIRECTORIES(${SPDLOG_INCLUDE_PATH})
 
-FILE(GLOB_RECURSE ENGINE_SRCS "${ENGINE_SRCS_PATH}/*.cpp")
+FILE(GLOB_RECURSE ENGINE_SRCS "${ENGINE_SRCS_PATH}/Engine/*.cpp")
 
 ADD_LIBRARY(Engine SHARED ${ENGINE_SRCS} $<TARGET_OBJECTS:GLFW>)
 
@@ -32,6 +33,7 @@ set_target_properties(Engine PROPERTIES
 
 target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH} ${SPDLOG_INCLUDE_PATH})
 target_link_libraries(Engine PUBLIC pthread dl)
+target_precompile_headers(Engine PUBLIC [${ENGINE_PCH})
 
 set(SANDBOX_SRCS_PATH  "${PROJECT_SOURCE_DIR}/Sandbox/src")
 file(GLOB_RECURSE SANDBOX_SRCS "${SANDBOX_SRCS_PATH}/*.cpp" "${SANDBOX_SRCS_PATH}/*.h")
