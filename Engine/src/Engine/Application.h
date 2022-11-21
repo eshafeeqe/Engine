@@ -14,8 +14,10 @@ namespace Engine
         virtual ~Application();
 
         void run();
-    
+        void onEvent(Event& e);
+
     private:
+        bool onWindowClose(Event& e);
         std::unique_ptr<Window> m_Window;
         bool m_Running = true;
     };
