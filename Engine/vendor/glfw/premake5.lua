@@ -53,7 +53,9 @@ project "GLFW"
             "GLFW/src/osmesa_context.c",
             "GLFW/src/linux_joystick.c",
 		}
-
+		
+		buildoptions { "-fPIC" }
+		
 		defines
 		{
 			"_GLFW_X11"

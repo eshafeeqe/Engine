@@ -48,6 +48,11 @@ project "Engine"
       "pthread", "dl"
    }
 
+   defines
+   {
+      "GLFW_INCLUDE_NONE",
+   }
+
    filter "configurations:Debug"
       defines { "EG_DEBUG"}
       symbols "On"

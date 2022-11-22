@@ -18,11 +18,13 @@ SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "-O2 -g")
 
 SET(ENGINE_SRCS_PATH     "${PROJECT_SOURCE_DIR}/Engine/src")
 SET(SPDLOG_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/spdlog/include")
+SET(GLFW_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/glfw/GLFW/include")
+SET(GLAD_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/Glad/include")
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw)
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/Glad)
 
-INCLUDE_DIRECTORIES(${SPDLOG_INCLUDE_PATH})
+add_compile_definitions(GLFW_INCLUDE_NONE)
 
 FILE(GLOB_RECURSE ENGINE_SRCS "${ENGINE_SRCS_PATH}/*.cpp")
 
@@ -31,13 +33,15 @@ ADD_LIBRARY(Engine SHARED ${ENGINE_SRCS} $<TARGET_OBJECTS:GLFW> $<TARGET_OBJECTS
 set_target_properties(Engine PROPERTIES
          LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Engine)
 
-target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH} ${SPDLOG_INCLUDE_PATH})
+target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH} 
+                                         ${SPDLOG_INCLUDE_PATH}
+                                         ${GLFW_INCLUDE_PATH}
+                                         ${GLAD_INCLUDE_PATH})
+
 target_link_libraries(Engine PUBLIC pthread dl)
 
 set(SANDBOX_SRCS_PATH  "${PROJECT_SOURCE_DIR}/Sandbox/src")
 file(GLOB_RECURSE SANDBOX_SRCS "${SANDBOX_SRCS_PATH}/*.cpp" "${SANDBOX_SRCS_PATH}/*.h")
-
-message("${SANDBOX_SRCS}")
 
 add_executable(Sandbox ${SANDBOX_SRCS})
 

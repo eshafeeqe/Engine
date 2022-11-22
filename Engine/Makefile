@@ -25,7 +25,7 @@ ifeq ($(config),debug)
   OBJDIR = ../bin-int/Debug-linux-x86_64/Engine
   PCH = egpch.h
   GCH = $(OBJDIR)/$(notdir $(PCH)).gch
-  DEFINES += -DEG_DEBUG
+  DEFINES += -DGLFW_INCLUDE_NONE -DEG_DEBUG
   INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include
   FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
@@ -62,7 +62,7 @@ ifeq ($(config),release)
   OBJDIR = ../bin-int/Release-linux-x86_64/Engine
   PCH = egpch.h
   GCH = $(OBJDIR)/$(notdir $(PCH)).gch
-  DEFINES += -DEG_RELEASE
+  DEFINES += -DGLFW_INCLUDE_NONE -DEG_RELEASE
   INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include
   FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
