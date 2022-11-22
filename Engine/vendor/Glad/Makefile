@@ -20,20 +20,20 @@ ifeq ($(config),debug)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../bin/Debug-linux-x86_64/Sandbox
-  TARGET = $(TARGETDIR)/Sandbox
-  OBJDIR = ../bin-int/Debug-linux-x86_64/Sandbox
-  DEFINES += -DEG_DEBUG
-  INCLUDES += -I../Engine/src -I../Engine/vendor/spdlog/include
+  TARGETDIR = bin/Debug-linux-x86_64/Glad
+  TARGET = $(TARGETDIR)/libGlad.a
+  OBJDIR = bin-int/Debug-linux-x86_64/Glad
+  DEFINES +=
+  INCLUDES += -Iinclude
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug-linux-x86_64/Engine/libEngine.so
-  LDDEPS += ../bin/Debug-linux-x86_64/Engine/libEngine.so
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Engine' -m64
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -55,20 +55,20 @@ ifeq ($(config),release)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../bin/Release-linux-x86_64/Sandbox
-  TARGET = $(TARGETDIR)/Sandbox
-  OBJDIR = ../bin-int/Release-linux-x86_64/Sandbox
-  DEFINES += -DEG_RELEASE
-  INCLUDES += -I../Engine/src -I../Engine/vendor/spdlog/include
+  TARGETDIR = bin/Release-linux-x86_64/Glad
+  TARGET = $(TARGETDIR)/libGlad.a
+  OBJDIR = bin-int/Release-linux-x86_64/Glad
+  DEFINES +=
+  INCLUDES += -Iinclude
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release-linux-x86_64/Engine/libEngine.so
-  LDDEPS += ../bin/Release-linux-x86_64/Engine/libEngine.so
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -Wl,-rpath,'$$ORIGIN/../Engine' -m64
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -81,7 +81,7 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/SandboxApp.o \
+	$(OBJDIR)/glad.o \
 
 RESOURCES := \
 
@@ -93,7 +93,7 @@ ifeq (.exe,$(findstring .exe,$(ComSpec)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES) | $(TARGETDIR)
-	@echo Linking Sandbox
+	@echo Linking Glad
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -116,7 +116,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Sandbox
+	@echo Cleaning Glad
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -135,14 +135,14 @@ ifneq (,$(PCH))
 $(OBJECTS): $(GCH) $(PCH) | $(OBJDIR)
 $(GCH): $(PCH) | $(OBJDIR)
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+	$(SILENT) $(CC) -x c-header $(ALL_CFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/SandboxApp.o: src/SandboxApp.cpp
+$(OBJDIR)/glad.o: src/glad.c
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))
