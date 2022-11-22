@@ -10,7 +10,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/vendor/glfw/GLFW/include"
 IncludeDir["Glad"] = "Engine/vendor/Glad/include"
 
-include "Engine/vendor/glfw/GLFW"
+include "Engine/vendor/glfw"
 include "Engine/vendor/Glad"
 
 
