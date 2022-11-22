@@ -18,6 +18,8 @@ project "Glad"
 		"include",
 	}
 
+	buildoptions { "-fPIC" }
+
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
