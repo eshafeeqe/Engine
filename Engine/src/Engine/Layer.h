@@ -19,7 +19,7 @@ namespace Engine
         virtual void OnUpdate(){}
         virtual void OnEvent(Event& event){}
 
-        inline const std::string& GetName() const {return m_DeubName;}
+        inline const std::string& GetName() const {return m_DebugName;}
 
     protected:
         std::string m_DebugName;
