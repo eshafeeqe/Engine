@@ -18,21 +18,11 @@ namespace Engine
     Application::~Application()
     {}
 
-    void Application::PushLayer(std::shared_ptr<Layer>& layer)
-    {
-        m_LayerStack.PushLayer(layer);
-    }
-
-    void Application::PushOverlay(std::shared_ptr<Layer>& overlay)
-    {
-        m_LayerStack.PushOverlay(overlay);
-    }
-
     void Application::onEvent(Event& e)
     {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(onWindowClose));
-        EG_CORE_TRACE("{0}", e);
+        //EG_CORE_TRACE("{0}", e);
 
         for(auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
         {
@@ -46,13 +36,12 @@ namespace Engine
     {
         while(m_Running)
         {
-            for(auto layer: m_LayerStack)
+            m_Window->OnUpdate();
+
+            for(auto& layer: m_LayerStack)
             {
                 layer->OnUpdate();
             }
-
-            m_Window->OnUpdate();
-
         }
     }
     
@@ -60,6 +49,16 @@ namespace Engine
     {
         m_Running = false;
         return true;
+    }
+
+    void Application::PushLayer(std::shared_ptr<Layer>& layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+
+    void Application::PushOverlay(std::shared_ptr<Layer>& overlay)
+    {
+        m_LayerStack.PushLayer(overlay);
     }
 
 }
