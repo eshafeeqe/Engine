@@ -20,22 +20,20 @@ ifeq ($(config),debug)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../bin/Debug-linux-x86_64/Engine
-  TARGET = $(TARGETDIR)/libEngine.so
-  OBJDIR = ../bin-int/Debug-linux-x86_64/Engine
-  PCH = egpch.h
-  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
-  DEFINES += -DGLFW_INCLUDE_NONE -DEG_DEBUG
-  INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui
-  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
+  TARGETDIR = bin/Debug-linux-x86_64/ImGui
+  TARGET = $(TARGETDIR)/libImGui.a
+  OBJDIR = bin-int/Debug-linux-x86_64/ImGui
+  DEFINES +=
+  INCLUDES +=
+  FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += vendor/glfw/bin/Debug-linux-x86_64/GLFW/libGLFW.a vendor/Glad/bin/Debug-linux-x86_64/Glad/libGlad.a vendor/imgui/bin/Debug-linux-x86_64/ImGui/libImGui.a -lpthread -ldl
-  LDDEPS += vendor/glfw/bin/Debug-linux-x86_64/GLFW/libGLFW.a vendor/Glad/bin/Debug-linux-x86_64/Glad/libGlad.a vendor/imgui/bin/Debug-linux-x86_64/ImGui/libImGui.a
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -57,22 +55,20 @@ ifeq ($(config),release)
   ifeq ($(origin AR), default)
     AR = ar
   endif
-  TARGETDIR = ../bin/Release-linux-x86_64/Engine
-  TARGET = $(TARGETDIR)/libEngine.so
-  OBJDIR = ../bin-int/Release-linux-x86_64/Engine
-  PCH = egpch.h
-  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
-  DEFINES += -DGLFW_INCLUDE_NONE -DEG_RELEASE
-  INCLUDES += -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui
-  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
+  TARGETDIR = bin/Release-linux-x86_64/ImGui
+  TARGET = $(TARGETDIR)/libImGui.a
+  OBJDIR = bin-int/Release-linux-x86_64/ImGui
+  DEFINES +=
+  INCLUDES +=
+  FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += vendor/glfw/bin/Release-linux-x86_64/GLFW/libGLFW.a vendor/Glad/bin/Release-linux-x86_64/Glad/libGlad.a vendor/imgui/bin/Release-linux-x86_64/ImGui/libImGui.a -lpthread -ldl
-  LDDEPS += vendor/glfw/bin/Release-linux-x86_64/GLFW/libGLFW.a vendor/Glad/bin/Release-linux-x86_64/Glad/libGlad.a vendor/imgui/bin/Release-linux-x86_64/ImGui/libImGui.a
-  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -85,11 +81,11 @@ all: prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/Application.o \
-	$(OBJDIR)/Layer.o \
-	$(OBJDIR)/LayerStack.o \
-	$(OBJDIR)/Log.o \
-	$(OBJDIR)/LinuxWindow.o \
+	$(OBJDIR)/imgui.o \
+	$(OBJDIR)/imgui_demo.o \
+	$(OBJDIR)/imgui_draw.o \
+	$(OBJDIR)/imgui_tables.o \
+	$(OBJDIR)/imgui_widgets.o \
 
 RESOURCES := \
 
@@ -101,7 +97,7 @@ ifeq (.exe,$(findstring .exe,$(ComSpec)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES) | $(TARGETDIR)
-	@echo Linking Engine
+	@echo Linking ImGui
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -124,7 +120,7 @@ else
 endif
 
 clean:
-	@echo Cleaning Engine
+	@echo Cleaning ImGui
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -148,19 +144,19 @@ else
 $(OBJECTS): | $(OBJDIR)
 endif
 
-$(OBJDIR)/Application.o: src/Engine/Application.cpp
+$(OBJDIR)/imgui.o: ImGui/imgui.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Layer.o: src/Engine/Layer.cpp
+$(OBJDIR)/imgui_demo.o: ImGui/imgui_demo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/LayerStack.o: src/Engine/LayerStack.cpp
+$(OBJDIR)/imgui_draw.o: ImGui/imgui_draw.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Log.o: src/Engine/Log.cpp
+$(OBJDIR)/imgui_tables.o: ImGui/imgui_tables.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/LinuxWindow.o: src/Platform/Linux/LinuxWindow.cpp
+$(OBJDIR)/imgui_widgets.o: ImGui/imgui_widgets.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
