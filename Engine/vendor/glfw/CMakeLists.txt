@@ -46,7 +46,7 @@ add_library(GLFW STATIC ${GLFW_SRC_PATH}/include/GLFW/glfw3.h
                         ${GLFW_SRC_PATH}/src/linux_joystick.c)
 
 set_target_properties(GLFW PROPERTIES
-            ARCHIVE_OUTPUT_DIRECTORY ${GLFW_SRC_PATH}/bin/GLFW)
+            ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 set_property(TARGET GLFW PROPERTY POSITION_INDEPENDENT_CODE ON)
 

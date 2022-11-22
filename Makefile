@@ -32,7 +32,7 @@ all: $(PROJECTS)
 GLFW:
 ifneq (,$(GLFW_config))
 	@echo "==== Building GLFW ($(GLFW_config)) ===="
-	@${MAKE} --no-print-directory -C Engine/vendor/glfw/GLFW -f Makefile config=$(GLFW_config)
+	@${MAKE} --no-print-directory -C Engine/vendor/glfw -f Makefile config=$(GLFW_config)
 endif
 
 Glad:
@@ -54,7 +54,7 @@ ifneq (,$(Sandbox_config))
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C Engine/vendor/glfw/GLFW -f Makefile clean
+	@${MAKE} --no-print-directory -C Engine/vendor/glfw -f Makefile clean
 	@${MAKE} --no-print-directory -C Engine/vendor/Glad -f Makefile clean
 	@${MAKE} --no-print-directory -C Engine -f Makefile clean
 	@${MAKE} --no-print-directory -C Sandbox -f Makefile clean
