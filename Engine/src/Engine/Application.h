@@ -12,7 +12,6 @@ namespace Engine
     {
         
     public:
-        Application();
         virtual ~Application();
 
         void run();
@@ -22,21 +21,27 @@ namespace Engine
         void PushOverlay(std::shared_ptr<Layer>& overlay);
 
         inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
-        inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
 
-        static std::weak_ptr<Application>& Get();
+        static std::shared_ptr<Application>& Get();
 
-    private:
         bool onWindowClose(Event& e);
+    
+    protected:
+        Application();
+        Application(const Application& rs);
+        Application& operator =(const Application& rs);
+
         
+    private:
+
         std::unique_ptr<Window> m_Window;
         bool m_Running = true;
         LayerStack m_LayerStack;
     
-    private:
-        static std::weak_ptr<Application> s_Instance;
+        static std::shared_ptr<Application> m_Instance;
+        static std::mutex m_Mutex;
 
     };
 
-    Application* CreateApplication();
+    std::unique_ptr<Engine::Application> CreateApplication();
 }

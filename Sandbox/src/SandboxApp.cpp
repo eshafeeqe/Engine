@@ -20,9 +20,9 @@ class ExampleLayer: public Engine::Layer
 
 class Sandbox : public Engine::Application
 {
-private:
 
 public:
+
     Sandbox()
     {
         auto example_layer = std::dynamic_pointer_cast<ExampleLayer::Layer>(std::make_shared<ExampleLayer>());
@@ -36,7 +36,8 @@ public:
 };
 
 
-Engine::Application* Engine::CreateApplication()
+std::unique_ptr<Engine::Application> Engine::CreateApplication()
 {
-    return new Sandbox();
+    return std::make_unique<Sandbox>();
+
 }
