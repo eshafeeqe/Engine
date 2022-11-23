@@ -13,17 +13,19 @@ endif
 ifeq ($(config),debug)
   GLFW_config = debug
   Glad_config = debug
+  ImGui_config = debug
   Engine_config = debug
   Sandbox_config = debug
 endif
 ifeq ($(config),release)
   GLFW_config = release
   Glad_config = release
+  ImGui_config = release
   Engine_config = release
   Sandbox_config = release
 endif
 
-PROJECTS := GLFW Glad Engine Sandbox
+PROJECTS := GLFW Glad ImGui Engine Sandbox
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -41,7 +43,13 @@ ifneq (,$(Glad_config))
 	@${MAKE} --no-print-directory -C Engine/vendor/Glad -f Makefile config=$(Glad_config)
 endif
 
-Engine: GLFW Glad
+ImGui:
+ifneq (,$(ImGui_config))
+	@echo "==== Building ImGui ($(ImGui_config)) ===="
+	@${MAKE} --no-print-directory -C Engine/vendor/imgui -f Makefile config=$(ImGui_config)
+endif
+
+Engine: GLFW Glad ImGui
 ifneq (,$(Engine_config))
 	@echo "==== Building Engine ($(Engine_config)) ===="
 	@${MAKE} --no-print-directory -C Engine -f Makefile config=$(Engine_config)
@@ -56,6 +64,7 @@ endif
 clean:
 	@${MAKE} --no-print-directory -C Engine/vendor/glfw -f Makefile clean
 	@${MAKE} --no-print-directory -C Engine/vendor/Glad -f Makefile clean
+	@${MAKE} --no-print-directory -C Engine/vendor/imgui -f Makefile clean
 	@${MAKE} --no-print-directory -C Engine -f Makefile clean
 	@${MAKE} --no-print-directory -C Sandbox -f Makefile clean
 
@@ -71,6 +80,7 @@ help:
 	@echo "   clean"
 	@echo "   GLFW"
 	@echo "   Glad"
+	@echo "   ImGui"
 	@echo "   Engine"
 	@echo "   Sandbox"
 	@echo ""

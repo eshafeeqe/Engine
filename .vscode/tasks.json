@@ -8,8 +8,12 @@
         "targets": [
           "all"
         ],
-        "group": "build",
-        "problemMatcher": [],
+        
+        "problemMatcher": ["$gcc"],
+        "group": {
+        "kind": "build",
+        "isDefault": true
+      },
         "detail": "CMake template build task"
       }
     ]
