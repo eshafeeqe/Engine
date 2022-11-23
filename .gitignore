@@ -34,6 +34,8 @@
 
 *.log
 
+Makefile
+
 # Binary folder
 bin/
 bin-int/
