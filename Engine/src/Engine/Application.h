@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-    class ENGINE_API Application
+    class ENGINE_API Application 
     {
         
     public:
@@ -21,12 +21,21 @@ namespace Engine
         void PushLayer(std::shared_ptr<Layer>& layer);
         void PushOverlay(std::shared_ptr<Layer>& overlay);
 
+        inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
+        inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
+
+        static std::weak_ptr<Application>& Get();
 
     private:
         bool onWindowClose(Event& e);
+        
         std::unique_ptr<Window> m_Window;
         bool m_Running = true;
         LayerStack m_LayerStack;
+    
+    private:
+        static std::weak_ptr<Application> s_Instance;
+
     };
 
     Application* CreateApplication();

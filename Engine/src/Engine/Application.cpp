@@ -8,15 +8,18 @@ namespace Engine
 {
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
- 
+    
     Application::Application()
     {
+        EG_CORE_ASSERT(!s_Instance, "Application already exists!")
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
     }
 
     Application::~Application()
     {}
+
+    Application::Application
 
     void Application::onEvent(Event& e)
     {

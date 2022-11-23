@@ -1,7 +1,10 @@
 #pragma once
 #include "egpch.h"
+#include "imgui.h"
 
 #include "Engine/Layer.h"
+#include "GLFW/glfw3.h"
+#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
 namespace Engine {
 
@@ -12,12 +15,13 @@ namespace Engine {
         ImGuiLayer();
         ~ImGuiLayer();
 
-    private:
-
         void OnUpdate();
         void OnEvent(Event& event);
         void OnAttach();
         void OnDetach(); 
+
+    private:
+        float m_Time = 0.0f;
     };
     
     
