@@ -1,6 +1,4 @@
 #include "ImGuiLayer.h"
-
-#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 namespace Engine
 {
     
@@ -17,7 +15,7 @@ namespace Engine
     void ImGuiLayer::OnUpdate() {
         
         ImGuiIO& io = ImGui::GetIO();
-        auto& app = Application::Get();
+        Application* app = Application::Get();
         io.DisplaySize = ImVec2(app->GetWindow()->GetWidth(), app->GetWindow()->GetHeight() );
         
         float time = (float)glfwGetTime();
@@ -38,9 +36,9 @@ namespace Engine
     void ImGuiLayer::OnAttach()
     {
         ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
         ImGui::StyleColorsDark();
-
-        ImGuiIO& io = ImGui::GetIO();
+        
         io.BackendFlags |=  ImGuiBackendFlags_HasMouseCursors;
         io.BackendFlags |=  ImGuiBackendFlags_HasSetMousePos;
 
@@ -67,7 +65,7 @@ namespace Engine
         io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
         io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
         io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
-
+        
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 

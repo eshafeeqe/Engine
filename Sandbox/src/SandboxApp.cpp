@@ -40,8 +40,8 @@ public:
 };
 
 
-std::unique_ptr<Engine::Application> Engine::CreateApplication()
+Engine::Application* Engine::CreateApplication()
 {
-    return std::make_unique<Sandbox>();
+    return new Sandbox();
 
 }

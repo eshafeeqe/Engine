@@ -9,11 +9,12 @@ namespace Engine
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
     
-    std::shared_ptr<Application> Application::m_Instance = nullptr;
+    Application* Application::m_Instance = nullptr;
     std::mutex Application::m_Mutex;
 
     Application::Application()
     {
+        m_Instance = this;
         EG_CORE_ASSERT(!m_Instance, "Application already exists!");
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
@@ -22,14 +23,8 @@ namespace Engine
     Application::~Application()
     {}
 
-    std::shared_ptr<Application>& Application::Get()
+    Application* Application::Get()
     {
-
-        if(!m_Instance)
-        {
-            std::lock_guard<std::mutex> lock(m_Mutex);
-            m_Instance = std::shared_ptr<Application>(new Application());
-        }
         return m_Instance;
     }
 

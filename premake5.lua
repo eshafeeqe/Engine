@@ -84,6 +84,10 @@ project "Sandbox"
    {
       "Engine/src",
       "Engine/vendor/spdlog/include", 
+      "%{IncludeDir.GLFW}",
+      "%{IncludeDir.Glad}", 
+      "%{IncludeDir.ImGui}", 
+ 
    }
 
    links

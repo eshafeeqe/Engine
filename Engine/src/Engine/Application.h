@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-    class ENGINE_API Application 
+    class ENGINE_API Application  
     {
         
     public:
@@ -22,7 +22,7 @@ namespace Engine
 
         inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
 
-        static std::shared_ptr<Application>& Get();
+        static Application* Get();
 
         bool onWindowClose(Event& e);
     
@@ -38,10 +38,10 @@ namespace Engine
         bool m_Running = true;
         LayerStack m_LayerStack;
     
-        static std::shared_ptr<Application> m_Instance;
+        static Application* m_Instance;
         static std::mutex m_Mutex;
 
     };
 
-    std::unique_ptr<Engine::Application> CreateApplication();
+    Application* CreateApplication();
 }
