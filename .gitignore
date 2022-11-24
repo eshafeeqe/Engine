@@ -33,6 +33,7 @@
 
 
 *.log
+*.ini
 
 Makefile
 

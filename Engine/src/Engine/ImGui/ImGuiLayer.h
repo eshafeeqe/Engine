@@ -4,6 +4,7 @@
 
 #include "Engine/Layer.h"
 #include "GLFW/glfw3.h"
+#include "Engine/Application.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
 namespace Engine {

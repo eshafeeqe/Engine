@@ -14,7 +14,7 @@ namespace Engine
 
     Application::Application()
     {
-
+        EG_CORE_ASSERT(!m_Instance, "Application already exists!");
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
     }
@@ -69,11 +69,13 @@ namespace Engine
     void Application::PushLayer(std::shared_ptr<Layer>& layer)
     {
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(std::shared_ptr<Layer>& overlay)
     {
-        m_LayerStack.PushLayer(overlay);
+        m_LayerStack.PushOverlay(overlay);
+        overlay->OnAttach();
     }
 
 }
