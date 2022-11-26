@@ -2,6 +2,8 @@
 
 #define ENGINE_API 
 
+#define EG_ENABLE_ASSERTS
+
 #ifdef  EG_ENABLE_ASSERTS
     #define EMBED_BREAKPOINT  asm volatile ("int3;")
     #define EG_ASSERT(x, ...) {if(!x) {EG_ERROR("Assertion Failed:{0}", __VA_ARGS__); EMBED_BREAKPOINT;}}
