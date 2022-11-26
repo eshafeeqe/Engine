@@ -6,6 +6,9 @@
 #include "Engine/Window.h"
 #include "Engine/Events/ApplicationEvent.h"
 
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 namespace Engine
 {
     class ENGINE_API Application  

@@ -1,19 +1,6 @@
-/usr/bin/make all --dry-run --keep-going --print-directory
+/usr/bin/make all --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/elan/Dev/Engine'
-echo "==== Building GLFW (debug) ===="
-/usr/bin/make --no-print-directory -C Engine/vendor/GLFW -f Makefile config=debug
- 
-:
- 
-echo "==== Building Engine (debug) ===="
-/usr/bin/make --no-print-directory -C Engine -f Makefile config=debug
- 
-:
- 
-echo "==== Building Sandbox (debug) ===="
-/usr/bin/make --no-print-directory -C Sandbox -f Makefile config=debug
- 
-:
- 
 make: Leaving directory '/home/elan/Dev/Engine'
  
+make: *** No rule to make target 'all'.
+
