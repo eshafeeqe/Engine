@@ -4,7 +4,9 @@
 #include "Engine/LayerStack.h"
 #include "Engine/Core.h"
 #include "Engine/Window.h"
+#include "Engine/Input.h"
 #include "Engine/Events/ApplicationEvent.h"
+#include "Engine/Log.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
