@@ -52,9 +52,6 @@ namespace Engine
                 layer->OnUpdate();
             }
             
-            auto [x, y] =  Input::GetMousPosition();
-
-            EG_CORE_TRACE("{0}, {1}", x, y); 
             m_Window->OnUpdate();
         }
     }

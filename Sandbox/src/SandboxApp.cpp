@@ -8,12 +8,13 @@ class ExampleLayer: public Engine::Layer
         
         void OnUpdate() override
         {
-            EG_INFO("ExampleLayer: Update");
+            if(Engine::Input::IsKeyPressed(EG_KEY_TAB))
+                EG_TRACE("Tab Key Pressed!");
         }
 
         void OnEvent(Engine::Event& event) override
         {
-            EG_TRACE("{0}", event);
+        
         }
 
 };
