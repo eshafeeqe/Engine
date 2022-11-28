@@ -21,6 +21,7 @@ SET(SPDLOG_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/spdlog/include")
 SET(GLFW_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/glfw/GLFW/include")
 SET(GLAD_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/Glad/include")
 SET(IMGUI_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/imgui/ImGui")
+SET(GLM_INCLUDE_PATH  "${PROJECT_SOURCE_DIR}/Engine/vendor/glm")
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw)
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/Glad)
@@ -41,7 +42,8 @@ target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH}
                                          ${SPDLOG_INCLUDE_PATH}
                                          ${GLFW_INCLUDE_PATH}
                                          ${GLAD_INCLUDE_PATH}
-                                         ${IMGUI_INCLUDE_PATH})
+                                         ${IMGUI_INCLUDE_PATH}
+                                         ${GLM_INCLUDE_PATH})
 
 target_link_libraries(Engine PUBLIC pthread dl)
 

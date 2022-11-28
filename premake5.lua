@@ -10,6 +10,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/vendor/glfw/GLFW/include"
 IncludeDir["Glad"] = "Engine/vendor/Glad/include"
 IncludeDir["ImGui"] = "Engine/vendor/imgui/ImGui"
+IncludeDir["glm"] = "Engine/vendor/glm"
 
 include "Engine/vendor/glfw"
 include "Engine/vendor/Glad"
@@ -41,6 +42,7 @@ project "Engine"
       "%{IncludeDir.GLFW}",
       "%{IncludeDir.Glad}", 
       "%{IncludeDir.ImGui}", 
+      "%{IncludeDir.glm}", 
    }
 
    links
@@ -87,6 +89,7 @@ project "Sandbox"
       "%{IncludeDir.GLFW}",
       "%{IncludeDir.Glad}", 
       "%{IncludeDir.ImGui}", 
+      "%{IncludeDir.glm}", 
  
    }
 

@@ -1,10 +1,14 @@
 #include <Engine.h>
 
+
 class ExampleLayer: public Engine::Layer
 {
     public:
         ExampleLayer()
-            : Layer("Example") {}
+            : Layer("Example") 
+        {
+
+        }
         
         void OnUpdate() override
         {
