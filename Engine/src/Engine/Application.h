@@ -7,7 +7,7 @@
 #include "Engine/Input.h"
 #include "Engine/Events/ApplicationEvent.h"
 #include "Engine/Log.h"
-
+#include "Engine/ImGui/ImGuiLayer.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -41,6 +41,8 @@ namespace Engine
     private:
 
         std::unique_ptr<Window> m_Window;
+        std::shared_ptr<ImGuiLayer> m_ImGuiLayer;
+
         bool m_Running = true;
         LayerStack m_LayerStack;
     

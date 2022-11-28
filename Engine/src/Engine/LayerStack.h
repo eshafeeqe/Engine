@@ -23,7 +23,7 @@ namespace Engine {
 
     private:
         std::vector<std::shared_ptr<Layer>> m_Layers;
-        std::vector<std::shared_ptr<Layer>>::iterator m_LayerInsert;
+        unsigned int m_LayerInsertIndex = 0;
     };
 
 

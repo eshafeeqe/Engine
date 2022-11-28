@@ -1,6 +1,9 @@
 #pragma once
 #include "egpch.h"
+
 #include "imgui.h"
+#include "backends/imgui_impl_opengl3.cpp"
+#include "backends/imgui_impl_glfw.cpp"
 
 #include "Engine/Layer.h"
 #include "Engine/Core.h"
@@ -8,8 +11,8 @@
 #include "Engine/Events/MouseEvent.h"
 #include "Engine/Events/ApplicationEvent.h"
 
+
 #include "Engine/Application.h"
-#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -23,20 +26,13 @@ namespace Engine {
         ImGuiLayer();
         ~ImGuiLayer();
 
-        void OnUpdate();
-        void OnEvent(Event& event);
-        void OnAttach();
-        void OnDetach(); 
-    
-    private:
-        bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-        bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-        bool OnMouseMovedEvent(MouseMovedEvent& e);
-        bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-        bool OnKeyPressedEvent(KeyPressedEvent& e);
-        bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-        bool OnWindowResizeEvent(WindowResizeEvent& e);
-        bool OnKeyTypedEvent(KeyTypedEvent& e);
+        virtual void OnAttach() override;
+        virtual void OnDetach() override;
+        virtual void OnImGuiRender() override;
+
+        void Begin();
+        void End();
+
 
     private:
         float m_Time = 0.0f;

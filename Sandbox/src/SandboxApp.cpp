@@ -33,9 +33,6 @@ public:
         std::shared_ptr<Engine::Layer> example_layer = std::make_shared<ExampleLayer>();
         PushLayer(example_layer);
         
-        std::shared_ptr<Engine::Layer> imgui_layer = std::make_shared<Engine::ImGuiLayer>();
-        PushOverlay(imgui_layer);
-        //auto imgui_layer = 
     }
 
     ~Sandbox()

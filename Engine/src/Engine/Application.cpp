@@ -16,6 +16,8 @@ namespace Engine
         EG_CORE_ASSERT(m_Instance, "Application already exists!");
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
+        m_ImGuiLayer = std::make_shared<ImGuiLayer>();
+
     }
 
     Application::~Application()
@@ -51,7 +53,16 @@ namespace Engine
             {
                 layer->OnUpdate();
             }
+
+            m_ImGuiLayer->Begin();
             
+            for(auto& layer: m_LayerStack)
+            {
+                layer->OnImGuiRender();
+            }
+
+            m_ImGuiLayer->End();
+
             m_Window->OnUpdate();
         }
     }
