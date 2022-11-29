@@ -17,6 +17,7 @@ namespace Engine
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
         m_ImGuiLayer = std::make_shared<ImGuiLayer>();
+        PushOverlay(m_ImGuiLayer);
 
     }
 

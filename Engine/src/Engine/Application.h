@@ -9,8 +9,8 @@
 #include "Engine/Log.h"
 #include "Engine/ImGui/ImGuiLayer.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+//#include <glad/glad.h>
+//#include <GLFW/glfw3.h>
 
 namespace Engine
 {
@@ -41,7 +41,7 @@ namespace Engine
     private:
 
         std::unique_ptr<Window> m_Window;
-        std::shared_ptr<ImGuiLayer> m_ImGuiLayer;
+        std::shared_ptr<Layer> m_ImGuiLayer;
 
         bool m_Running = true;
         LayerStack m_LayerStack;

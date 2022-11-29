@@ -2,8 +2,6 @@
 #include "egpch.h"
 
 #include "imgui.h"
-#include "backends/imgui_impl_opengl3.cpp"
-#include "backends/imgui_impl_glfw.cpp"
 
 #include "Engine/Layer.h"
 #include "Engine/Core.h"
@@ -16,6 +14,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 
 namespace Engine {
 
@@ -30,8 +29,8 @@ namespace Engine {
         virtual void OnDetach() override;
         virtual void OnImGuiRender() override;
 
-        void Begin();
-        void End();
+        virtual void Begin() override;
+        virtual void End() override;
 
 
     private:

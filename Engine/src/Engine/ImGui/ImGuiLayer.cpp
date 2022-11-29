@@ -1,5 +1,9 @@
 #include "ImGuiLayer.h"
 
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#include "backends/imgui_impl_opengl3.cpp"
+#include "backends/imgui_impl_glfw.cpp"
+
 namespace Engine
 {
     
@@ -49,7 +53,7 @@ namespace Engine
         GLFWwindow* window = static_cast<GLFWwindow*>(app->GetWindow()->GetNativeWindow());
         
         ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui_ImplOpenGL3_Init("#vertsion 410");
+        ImGui_ImplOpenGL3_Init("#version 410");
     }
 
     void ImGuiLayer::Begin()
