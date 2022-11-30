@@ -1,5 +1,5 @@
 #include <Engine.h>
-
+#include <imgui.h>
 
 class ExampleLayer: public Engine::Layer
 {
@@ -14,6 +14,14 @@ class ExampleLayer: public Engine::Layer
         {
             if(Engine::Input::IsKeyPressed(EG_KEY_TAB))
                 EG_TRACE("Tab Key Pressed!");
+        }
+
+        void OnImGuiRender() override
+        {
+            ImGui::Begin("Test");
+            ImGui::Text("Hello World");
+            ImGui::End();
+
         }
 
         void OnEvent(Engine::Event& event) override
