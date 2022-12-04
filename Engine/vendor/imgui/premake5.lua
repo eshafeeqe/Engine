@@ -20,6 +20,9 @@ project "ImGui"
 		"ImGui/imgui_tables.cpp",
 	}
 
+	buildoptions { "-fPIC" }
+		
+
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"

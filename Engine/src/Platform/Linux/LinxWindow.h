@@ -3,13 +3,14 @@
 
 #include "Engine/Window.h"
 
+#include "Engine/Renderer/GraphicsContext.h"
 
 #include "Engine/Events/ApplicationEvent.h"
 #include "Engine/Events/MouseEvent.h"
 #include "Engine/Events/KeyEvent.h"
 
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
+
 
 
 namespace Engine
@@ -40,6 +41,7 @@ namespace Engine
     private:
 
         GLFWwindow* m_Window;
+        GraphicsContext* m_Context;
 
         struct WindowData
         {
