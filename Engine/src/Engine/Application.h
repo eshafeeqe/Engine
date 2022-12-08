@@ -49,6 +49,7 @@ namespace Engine
         static Application* m_Instance;
         static std::mutex m_Mutex;
 
+        uint m_VertexArray, m_VertexBuffer, m_IndexBuffer;
     };
 
     Application* CreateApplication();

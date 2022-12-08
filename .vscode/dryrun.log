@@ -1,6 +1,123 @@
 /usr/bin/make all --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/elan/Dev/Engine'
+echo "==== Building GLFW (debug) ===="
+/usr/bin/make --no-print-directory -C Engine/vendor/glfw -f Makefile config=debug
+echo Creating bin-int/Debug-linux-x86_64/GLFW
+mkdir -p bin-int/Debug-linux-x86_64/GLFW
+echo context.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/context.o" -MF "bin-int/Debug-linux-x86_64/GLFW/context.d" -c "GLFW/src/context.c"
+echo egl_context.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/egl_context.o" -MF "bin-int/Debug-linux-x86_64/GLFW/egl_context.d" -c "GLFW/src/egl_context.c"
+echo glx_context.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/glx_context.o" -MF "bin-int/Debug-linux-x86_64/GLFW/glx_context.d" -c "GLFW/src/glx_context.c"
+echo init.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/init.o" -MF "bin-int/Debug-linux-x86_64/GLFW/init.d" -c "GLFW/src/init.c"
+echo input.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/input.o" -MF "bin-int/Debug-linux-x86_64/GLFW/input.d" -c "GLFW/src/input.c"
+echo linux_joystick.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/linux_joystick.o" -MF "bin-int/Debug-linux-x86_64/GLFW/linux_joystick.d" -c "GLFW/src/linux_joystick.c"
+echo monitor.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/monitor.o" -MF "bin-int/Debug-linux-x86_64/GLFW/monitor.d" -c "GLFW/src/monitor.c"
+echo null_init.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/null_init.o" -MF "bin-int/Debug-linux-x86_64/GLFW/null_init.d" -c "GLFW/src/null_init.c"
+echo null_joystick.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/null_joystick.o" -MF "bin-int/Debug-linux-x86_64/GLFW/null_joystick.d" -c "GLFW/src/null_joystick.c"
+echo null_monitor.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/null_monitor.o" -MF "bin-int/Debug-linux-x86_64/GLFW/null_monitor.d" -c "GLFW/src/null_monitor.c"
+echo null_window.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/null_window.o" -MF "bin-int/Debug-linux-x86_64/GLFW/null_window.d" -c "GLFW/src/null_window.c"
+echo osmesa_context.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/osmesa_context.o" -MF "bin-int/Debug-linux-x86_64/GLFW/osmesa_context.d" -c "GLFW/src/osmesa_context.c"
+echo platform.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/platform.o" -MF "bin-int/Debug-linux-x86_64/GLFW/platform.d" -c "GLFW/src/platform.c"
+echo posix_module.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/posix_module.o" -MF "bin-int/Debug-linux-x86_64/GLFW/posix_module.d" -c "GLFW/src/posix_module.c"
+echo posix_thread.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/posix_thread.o" -MF "bin-int/Debug-linux-x86_64/GLFW/posix_thread.d" -c "GLFW/src/posix_thread.c"
+echo posix_time.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/posix_time.o" -MF "bin-int/Debug-linux-x86_64/GLFW/posix_time.d" -c "GLFW/src/posix_time.c"
+echo vulkan.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/vulkan.o" -MF "bin-int/Debug-linux-x86_64/GLFW/vulkan.d" -c "GLFW/src/vulkan.c"
+echo window.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/window.o" -MF "bin-int/Debug-linux-x86_64/GLFW/window.d" -c "GLFW/src/window.c"
+echo x11_init.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/x11_init.o" -MF "bin-int/Debug-linux-x86_64/GLFW/x11_init.d" -c "GLFW/src/x11_init.c"
+echo x11_monitor.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/x11_monitor.o" -MF "bin-int/Debug-linux-x86_64/GLFW/x11_monitor.d" -c "GLFW/src/x11_monitor.c"
+echo x11_window.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/x11_window.o" -MF "bin-int/Debug-linux-x86_64/GLFW/x11_window.d" -c "GLFW/src/x11_window.c"
+echo xkb_unicode.c
+clang   -MD -MP -D_GLFW_X11  -m64 -fPIC -g -fPIC  -o "bin-int/Debug-linux-x86_64/GLFW/xkb_unicode.o" -MF "bin-int/Debug-linux-x86_64/GLFW/xkb_unicode.d" -c "GLFW/src/xkb_unicode.c"
+echo Creating bin/Debug-linux-x86_64/GLFW
+mkdir -p bin/Debug-linux-x86_64/GLFW
+echo Linking GLFW
+ar -rcs "bin/Debug-linux-x86_64/GLFW/libGLFW.a" bin-int/Debug-linux-x86_64/GLFW/context.o bin-int/Debug-linux-x86_64/GLFW/egl_context.o bin-int/Debug-linux-x86_64/GLFW/glx_context.o bin-int/Debug-linux-x86_64/GLFW/init.o bin-int/Debug-linux-x86_64/GLFW/input.o bin-int/Debug-linux-x86_64/GLFW/linux_joystick.o bin-int/Debug-linux-x86_64/GLFW/monitor.o bin-int/Debug-linux-x86_64/GLFW/null_init.o bin-int/Debug-linux-x86_64/GLFW/null_joystick.o bin-int/Debug-linux-x86_64/GLFW/null_monitor.o bin-int/Debug-linux-x86_64/GLFW/null_window.o bin-int/Debug-linux-x86_64/GLFW/osmesa_context.o bin-int/Debug-linux-x86_64/GLFW/platform.o bin-int/Debug-linux-x86_64/GLFW/posix_module.o bin-int/Debug-linux-x86_64/GLFW/posix_thread.o bin-int/Debug-linux-x86_64/GLFW/posix_time.o bin-int/Debug-linux-x86_64/GLFW/vulkan.o bin-int/Debug-linux-x86_64/GLFW/window.o bin-int/Debug-linux-x86_64/GLFW/x11_init.o bin-int/Debug-linux-x86_64/GLFW/x11_monitor.o bin-int/Debug-linux-x86_64/GLFW/x11_window.o bin-int/Debug-linux-x86_64/GLFW/xkb_unicode.o 
+:
+echo "==== Building Glad (debug) ===="
+/usr/bin/make --no-print-directory -C Engine/vendor/Glad -f Makefile config=debug
+echo Creating bin-int/Debug-linux-x86_64/Glad
+mkdir -p bin-int/Debug-linux-x86_64/Glad
+echo glad.c
+clang   -MD -MP  -Iinclude -m64 -g -fPIC  -o "bin-int/Debug-linux-x86_64/Glad/glad.o" -MF "bin-int/Debug-linux-x86_64/Glad/glad.d" -c "src/glad.c"
+echo Creating bin/Debug-linux-x86_64/Glad
+mkdir -p bin/Debug-linux-x86_64/Glad
+echo Linking Glad
+ar -rcs "bin/Debug-linux-x86_64/Glad/libGlad.a" bin-int/Debug-linux-x86_64/Glad/glad.o 
+:
+echo "==== Building ImGui (debug) ===="
+/usr/bin/make --no-print-directory -C Engine/vendor/imgui -f Makefile config=debug
+echo Creating bin-int/Debug-linux-x86_64/ImGui
+mkdir -p bin-int/Debug-linux-x86_64/ImGui
+echo imgui.cpp
+clang++   -MD -MP   -m64 -fPIC -g -std=c++17 -fPIC  -o "bin-int/Debug-linux-x86_64/ImGui/imgui.o" -MF "bin-int/Debug-linux-x86_64/ImGui/imgui.d" -c "ImGui/imgui.cpp"
+echo imgui_demo.cpp
+clang++   -MD -MP   -m64 -fPIC -g -std=c++17 -fPIC  -o "bin-int/Debug-linux-x86_64/ImGui/imgui_demo.o" -MF "bin-int/Debug-linux-x86_64/ImGui/imgui_demo.d" -c "ImGui/imgui_demo.cpp"
+echo imgui_draw.cpp
+clang++   -MD -MP   -m64 -fPIC -g -std=c++17 -fPIC  -o "bin-int/Debug-linux-x86_64/ImGui/imgui_draw.o" -MF "bin-int/Debug-linux-x86_64/ImGui/imgui_draw.d" -c "ImGui/imgui_draw.cpp"
+echo imgui_tables.cpp
+clang++   -MD -MP   -m64 -fPIC -g -std=c++17 -fPIC  -o "bin-int/Debug-linux-x86_64/ImGui/imgui_tables.o" -MF "bin-int/Debug-linux-x86_64/ImGui/imgui_tables.d" -c "ImGui/imgui_tables.cpp"
+echo imgui_widgets.cpp
+clang++   -MD -MP   -m64 -fPIC -g -std=c++17 -fPIC  -o "bin-int/Debug-linux-x86_64/ImGui/imgui_widgets.o" -MF "bin-int/Debug-linux-x86_64/ImGui/imgui_widgets.d" -c "ImGui/imgui_widgets.cpp"
+echo Creating bin/Debug-linux-x86_64/ImGui
+mkdir -p bin/Debug-linux-x86_64/ImGui
+echo Linking ImGui
+ar -rcs "bin/Debug-linux-x86_64/ImGui/libImGui.a" bin-int/Debug-linux-x86_64/ImGui/imgui.o bin-int/Debug-linux-x86_64/ImGui/imgui_demo.o bin-int/Debug-linux-x86_64/ImGui/imgui_draw.o bin-int/Debug-linux-x86_64/ImGui/imgui_tables.o bin-int/Debug-linux-x86_64/ImGui/imgui_widgets.o 
+:
+echo "==== Building Engine (debug) ===="
+/usr/bin/make --no-print-directory -C Engine -f Makefile config=debug
+echo Creating ../bin-int/Debug-linux-x86_64/Engine
+mkdir -p ../bin-int/Debug-linux-x86_64/Engine
+echo egpch.h
+clang++ -x c++-header   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -o "../bin-int/Debug-linux-x86_64/Engine/egpch.h.gch" -MF "../bin-int/Debug-linux-x86_64/Engine/egpch.h.d" -c "egpch.h"
+echo Application.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/Application.o" -MF "../bin-int/Debug-linux-x86_64/Engine/Application.d" -c "src/Engine/Application.cpp"
+echo ImGuiLayer.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/ImGuiLayer.o" -MF "../bin-int/Debug-linux-x86_64/Engine/ImGuiLayer.d" -c "src/Engine/ImGui/ImGuiLayer.cpp"
+echo Layer.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/Layer.o" -MF "../bin-int/Debug-linux-x86_64/Engine/Layer.d" -c "src/Engine/Layer.cpp"
+echo LayerStack.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/LayerStack.o" -MF "../bin-int/Debug-linux-x86_64/Engine/LayerStack.d" -c "src/Engine/LayerStack.cpp"
+echo Log.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/Log.o" -MF "../bin-int/Debug-linux-x86_64/Engine/Log.d" -c "src/Engine/Log.cpp"
+echo LinuxInput.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/LinuxInput.o" -MF "../bin-int/Debug-linux-x86_64/Engine/LinuxInput.d" -c "src/Platform/Linux/LinuxInput.cpp"
+echo LinuxWindow.cpp
+clang++   -MD -MP -DGLFW_INCLUDE_NONE -DEG_DEBUG -I. -Isrc -Ivendor/spdlog/include -Ivendor/glfw/GLFW/include -Ivendor/Glad/include -Ivendor/imgui/ImGui -Ivendor/glm -m64 -fPIC -g -std=c++17 -include ../bin-int/Debug-linux-x86_64/Engine/egpch.h -o "../bin-int/Debug-linux-x86_64/Engine/LinuxWindow.o" -MF "../bin-int/Debug-linux-x86_64/Engine/LinuxWindow.d" -c "src/Platform/Linux/LinuxWindow.cpp"
+echo Creating ../bin/Debug-linux-x86_64/Engine
+mkdir -p ../bin/Debug-linux-x86_64/Engine
+echo Linking Engine
+clang++ -o "../bin/Debug-linux-x86_64/Engine/libEngine.so" ../bin-int/Debug-linux-x86_64/Engine/Application.o ../bin-int/Debug-linux-x86_64/Engine/ImGuiLayer.o ../bin-int/Debug-linux-x86_64/Engine/Layer.o ../bin-int/Debug-linux-x86_64/Engine/LayerStack.o ../bin-int/Debug-linux-x86_64/Engine/Log.o ../bin-int/Debug-linux-x86_64/Engine/LinuxInput.o ../bin-int/Debug-linux-x86_64/Engine/LinuxWindow.o    -L/usr/lib64 -m64 -shared -Wl,-soname=libEngine.so vendor/glfw/bin/Debug-linux-x86_64/GLFW/libGLFW.a vendor/Glad/bin/Debug-linux-x86_64/Glad/libGlad.a vendor/imgui/bin/Debug-linux-x86_64/ImGui/libImGui.a -lpthread -ldl
+:
+echo "==== Building Sandbox (debug) ===="
+/usr/bin/make --no-print-directory -C Sandbox -f Makefile config=debug
+echo Creating ../bin-int/Debug-linux-x86_64/Sandbox
+mkdir -p ../bin-int/Debug-linux-x86_64/Sandbox
+echo SandboxApp.cpp
+clang++   -MD -MP -DEG_DEBUG -I../Engine/src -I../Engine/vendor/spdlog/include -I../Engine/vendor/glfw/GLFW/include -I../Engine/vendor/Glad/include -I../Engine/vendor/imgui/ImGui -I../Engine/vendor/glm -m64 -g -std=c++17  -o "../bin-int/Debug-linux-x86_64/Sandbox/SandboxApp.o" -MF "../bin-int/Debug-linux-x86_64/Sandbox/SandboxApp.d" -c "src/SandboxApp.cpp"
+echo Creating ../bin/Debug-linux-x86_64/Sandbox
+mkdir -p ../bin/Debug-linux-x86_64/Sandbox
+echo Linking Sandbox
+clang++ -o "../bin/Debug-linux-x86_64/Sandbox/Sandbox" ../bin-int/Debug-linux-x86_64/Sandbox/SandboxApp.o    -L/usr/lib64 -Wl,-rpath,'$ORIGIN/../Engine' -m64 ../bin/Debug-linux-x86_64/Engine/libEngine.so
+:
 make: Leaving directory '/home/elan/Dev/Engine'
  
-make: *** No rule to make target 'all'.
-
