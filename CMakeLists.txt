@@ -45,7 +45,7 @@ target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH}
                                          ${IMGUI_INCLUDE_PATH}
                                          ${GLM_INCLUDE_PATH})
 
-target_link_libraries(Engine PUBLIC pthread dl glut GLU GL)
+target_link_libraries(Engine PUBLIC pthread dl)
 
 set(SANDBOX_SRCS_PATH  "${PROJECT_SOURCE_DIR}/Sandbox/src")
 file(GLOB_RECURSE SANDBOX_SRCS "${SANDBOX_SRCS_PATH}/*.cpp" "${SANDBOX_SRCS_PATH}/*.h")
@@ -54,7 +54,7 @@ add_executable(Sandbox ${SANDBOX_SRCS})
 
 set_target_properties(Sandbox PROPERTIES CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Sandbox)
 target_include_directories(Sandbox PUBLIC ${ENGINE_SRCS_PATH})
-target_link_libraries(Sandbox PUBLIC Engine glut GLU GL)
+target_link_libraries(Sandbox PUBLIC Engine)
 
 set_target_properties(Sandbox PROPERTIES
                       RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Sandbox)

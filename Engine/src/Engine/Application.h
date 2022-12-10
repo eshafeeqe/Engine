@@ -1,13 +1,14 @@
 #pragma once
 #include "egpch.h"
 
-#include "Engine/LayerStack.h"
 #include "Engine/Core.h"
 #include "Engine/Window.h"
 #include "Engine/Input.h"
-#include "Engine/Events/ApplicationEvent.h"
 #include "Engine/Log.h"
+#include "Engine/LayerStack.h"
+#include "Engine/Events/ApplicationEvent.h"
 #include "Engine/ImGui/ImGuiLayer.h"
+#include "Engine/Renderer/Shader.h"
 
 //#include <glad/glad.h>
 //#include <GLFW/glfw3.h>
@@ -42,7 +43,8 @@ namespace Engine
 
         std::unique_ptr<Window> m_Window;
         std::shared_ptr<Layer> m_ImGuiLayer;
-
+        std::unique_ptr <Shader> m_Shader;
+        
         bool m_Running = true;
         LayerStack m_LayerStack;
     
