@@ -7,6 +7,27 @@ namespace Engine
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
     
+    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+    {
+        switch(type)
+        {
+            case ShaderDataType::Float:  return GL_FLOAT;
+            case ShaderDataType::Float2: return GL_FLOAT;
+            case ShaderDataType::Float3: return GL_FLOAT;
+            case ShaderDataType::Float4: return GL_FLOAT;
+            case ShaderDataType::Int:    return GL_INT;
+            case ShaderDataType::Int2:   return GL_INT;
+            case ShaderDataType::Int3:   return GL_INT;
+            case ShaderDataType::Int4:   return GL_INT;
+            case ShaderDataType::Mat3:   return GL_FLOAT;
+            case ShaderDataType::Mat4:   return GL_FLOAT;
+            case ShaderDataType::Bool:   return GL_BOOL;
+
+        }
+
+        EG_ASSERT(false, " Unkown ShaderDataType!")
+    }
+
     Application* Application::m_Instance = nullptr;
     std::mutex Application::m_Mutex;
 
@@ -30,9 +51,25 @@ namespace Engine
 
         m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-        glEnableVertexAttribArray(0); 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3* sizeof(float), nullptr); 
 
+        BufferLayout layout = { 
+            {ShaderDataType::Float3, "a_Position" },
+            {ShaderDataType::Float3, "a_Color" },
+        };
+
+        uint32_t index = 0;
+        for (const auto& element: layout)
+        {
+            glEnableVertexAttribArray(index); 
+            glVertexAttribPointer (index, 
+                                   element.GetComponentCount(), 
+                                   ShaderDataTypeToOpenGLBaseType(element.Type), 
+                                   element.Normalized ? GL_TRUE : GL_FALSE, 
+                                   layout.GetStride(), 
+                                   (const void*)element.Offset); 
+            index++;
+
+        }
         
         uint indices[3] = {0, 1, 2};
         m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
@@ -42,6 +79,7 @@ namespace Engine
             #version 330 core
 
             layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec4 a_Color;
             out vec3 v_Position;
 
             void main()

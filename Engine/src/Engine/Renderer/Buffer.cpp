@@ -5,6 +5,20 @@
 namespace Engine
 {
 
+     void BufferLayout::CalculateOffsetAndStride()
+     {
+          m_Stride = 0;
+          uint32_t offset = 0;
+
+          for(auto& element: m_Elements)
+          {
+               element.Offset = offset;
+               offset += element.Size;
+               m_Stride += element.Size; 
+
+          }
+     }
+
      VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
      {
           switch (Renderer::GetAPI())
