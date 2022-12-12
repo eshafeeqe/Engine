@@ -5,14 +5,14 @@
 #include "Engine/Window.h"
 #include "Engine/Input.h"
 #include "Engine/Log.h"
-#include "Engine/Renderer/Buffer.h"
 #include "Engine/LayerStack.h"
 #include "Engine/Events/ApplicationEvent.h"
 #include "Engine/ImGui/ImGuiLayer.h"
 #include "Engine/Renderer/Shader.h"
 
-//#include <glad/glad.h>
-//#include <GLFW/glfw3.h>
+#include "Engine/Renderer/Buffer.h"
+#include "Engine/Renderer/VertexArray.h"
+
 
 namespace Engine
 {
@@ -45,8 +45,14 @@ namespace Engine
         std::unique_ptr<Window> m_Window;
         std::shared_ptr<Layer> m_ImGuiLayer;
         std::unique_ptr <Shader> m_Shader;
-        std::unique_ptr<VertexBuffer> m_VertexBuffer;
-        std::unique_ptr<IndexBuffer> m_IndexBuffer;
+        
+        std::unique_ptr <Shader> m_BlueShader;
+
+        std::shared_ptr<VertexArray> m_VertexArray;
+        std::shared_ptr<VertexBuffer> m_VertexBuffer;
+        std::shared_ptr<IndexBuffer> m_IndexBuffer;
+        
+        std::shared_ptr<VertexArray> m_SquareVA;
         
         bool m_Running = true;
         LayerStack m_LayerStack;
@@ -54,7 +60,6 @@ namespace Engine
         static Application* m_Instance;
         static std::mutex m_Mutex;
 
-        uint m_VertexArray;
     };
 
     Application* CreateApplication();

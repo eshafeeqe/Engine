@@ -97,8 +97,8 @@
 
     "files.exclude": {
         "**/.git": true,        
-        "**/.DS_Store": true,   
-
+        "**/.DS_Store": true, 
+        "*.tmp"  : true,
         ".history": true,                          
     },
     "cmake.configureOnOpen": false,
