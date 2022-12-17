@@ -6,12 +6,17 @@ This project is a try to replicate Cherno's game engine series ([https://youtube
 2.  Using Clang for compiling in Linux.
 3.  Use smart pointers instead of raw pointers.
 
+# Install Dependencies
+Ubuntu required x11 dev packages for compiling ImGui pakcage.
+`$ sudo apt-get install libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev`
+
 # Build and Run Instructions
 
 ## CMAKE
 
 1.  Clone the repository with submodules 
- `$ git clone --recurse-submodules -j8 https://github.com/eshafeeqe/Engine.git cd Engine`
+ `$ git clone --recurse-submodules -j8 https://github.com/eshafeeqe/Engine.git` 
+ `$ cd Engine`
 2. Create build folder
 	`$ mkdir build`
 3. Configure using CMAKE
@@ -24,7 +29,8 @@ This project is a try to replicate Cherno's game engine series ([https://youtube
 ## Premake
 
 1.  Clone the repository with submodules 
- `$ git clone --recurse-submodules -j8 https://github.com/eshafeeqe/Engine.git cd Engine`
+ `$ git clone --recurse-submodules -j8 https://github.com/eshafeeqe/Engine.git`
+ `$ cd Engine`
 3. Configure using Premake
 	`$ premake5 gmake`
 4. Build Project
