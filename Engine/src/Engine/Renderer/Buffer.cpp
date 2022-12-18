@@ -1,5 +1,5 @@
 #include "Buffer.h"
-
+#include "Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Engine
@@ -23,8 +23,8 @@ namespace Engine
      {
           switch (Renderer::GetAPI())
           {
-               case RendererAPI::None : EG_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
-               case RendererAPI::OpenGL : return new OpenGLVertexBuffer(vertices, size);
+               case RendererAPI::API::None : EG_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
+               case RendererAPI::API::OpenGL : return new OpenGLVertexBuffer(vertices, size);
           }
           EG_CORE_ASSERT(false, "Unknown RendererAPI!"); return nullptr;
      }
@@ -33,8 +33,8 @@ namespace Engine
      {
           switch (Renderer::GetAPI())
           {
-               case RendererAPI::None : EG_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
-               case RendererAPI::OpenGL : return new OpenGLIndexBuffer(indices, count);
+               case RendererAPI::API::None : EG_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
+               case RendererAPI::API::OpenGL : return new OpenGLIndexBuffer(indices, count);
           }
           EG_CORE_ASSERT(false, "Unknown RendererAPI!"); return nullptr;
         

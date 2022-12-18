@@ -9,6 +9,7 @@
 #include "Engine/Events/ApplicationEvent.h"
 #include "Engine/ImGui/ImGuiLayer.h"
 #include "Engine/Renderer/Shader.h"
+#include "Engine/Renderer/OrthographicCamera.h"
 
 #include "Engine/Renderer/Buffer.h"
 #include "Engine/Renderer/VertexArray.h"
@@ -53,12 +54,14 @@ namespace Engine
         std::shared_ptr<IndexBuffer> m_IndexBuffer;
         
         std::shared_ptr<VertexArray> m_SquareVA;
-        
+
+        OrthographicCamera m_Camera;
+            
         bool m_Running = true;
         LayerStack m_LayerStack;
     
         static Application* m_Instance;
-        static std::mutex m_Mutex;
+    
 
     };
 

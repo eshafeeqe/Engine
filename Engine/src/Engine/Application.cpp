@@ -1,5 +1,6 @@
 
 #include "Engine/Application.h"
+#include "Engine/Renderer/Renderer.h"
 
 
 namespace Engine
@@ -8,9 +9,9 @@ namespace Engine
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
     
     Application* Application::m_Instance = nullptr;
-    std::mutex Application::m_Mutex;
 
     Application::Application()
+    : m_Camera(-1.0f, 1.0f, -1.0f, 1.0f )
     {
         m_Instance = this;
         EG_CORE_ASSERT(m_Instance, "Application already exists!");
@@ -76,6 +77,7 @@ namespace Engine
             out vec3 v_Position;
             out vec4 v_Color;
 
+
             void main()
             {
                 v_Position = a_Position;
@@ -106,6 +108,7 @@ namespace Engine
             #version 330 core
 
             layout(location = 0) in vec3 a_Position;
+            
             
             out vec3 v_Position;
             
@@ -162,18 +165,20 @@ namespace Engine
     {
         while(m_Running)
         {
-            glClearColor(0.1f, 0.1f, 0.1f ,1);
-            glClear(GL_COLOR_BUFFER_BIT);
-            
-            m_BlueShader->Bind();            
-            m_SquareVA->Bind();
-            glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount() ,GL_UNSIGNED_INT, nullptr); 
-            
-            m_Shader->Bind();            
-            m_VertexArray->Bind();
-            glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr); 
-            glBindVertexArray(0);
+            RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+            RenderCommand::Clear();
+             
+            Renderer::BeginScene();
 
+            m_BlueShader->Bind();            
+            Renderer::Submit(m_SquareVA);
+
+            m_Shader->Bind();            
+            Renderer::Submit(m_VertexArray);
+
+            Renderer::EndScene();
+
+            
             for(auto& layer: m_LayerStack)
             {
                 layer->OnUpdate();

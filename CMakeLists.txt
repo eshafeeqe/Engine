@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 3.9)
 
 project(Engine VERSION 1.0.1 DESCRIPTION "Engine description")
 
+
 SET (CMAKE_C_FLAGS_INIT                "-Wall")
 SET (CMAKE_C_FLAGS_DEBUG_INIT          "-g")
 SET (CMAKE_C_FLAGS_MINSIZEREL_INIT     "-Os -DNDEBUG")
