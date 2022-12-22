@@ -1,6 +1,9 @@
+#include "Platform/OpenGL/OpenGLShader.h"
 #include <Engine.h>
 #include <imgui.h>
-#include "glm/gtc/matrix_transform.hpp"
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer: public Engine::Layer
 {
@@ -91,7 +94,7 @@ public:
 
         )";
 
-        m_Shader = std::make_unique<Engine::Shader>(vertexSrc, fragmentSrc);
+        m_Shader.reset(Engine::Shader::Create(vertexSrc, fragmentSrc));
 
         std::string flatColorShaderVertexSrc = R"(
             #version 330 core
@@ -100,7 +103,7 @@ public:
             
             uniform mat4 u_ViewProjection;
             uniform mat4 u_Transform;
-            uniform vec4 u_Color;
+            
             
             out vec3 v_Position;
             out vec4 v_Color;
@@ -108,7 +111,6 @@ public:
             void main()
             {
                 v_Position = a_Position;
-                v_Color = u_Color;
                 gl_Position = u_ViewProjection*u_Transform*vec4(a_Position, 1);
             }
 
@@ -119,19 +121,16 @@ public:
 
             layout(location = 0) out vec4 color;
             in vec3 v_Position;
-            in vec4 v_Color;
+            uniform vec3 u_Color;
 
             void main()
             {
-                color = v_Color;
+                color = vec4(u_Color, 1.0);
             }
 
         )"; 
 
-
-        
-        m_FlatColorShader = std::make_unique<Engine::Shader>(flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
-
+        m_FlatColorShader.reset(Engine::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
     }
     
@@ -173,21 +172,17 @@ public:
     
         Engine::Renderer::BeginScene(m_Camera);
         
-        glm::vec4 redColor  = {0.8f, 0.2f, 0.3f, 1.0f };
-        glm::vec4 blueColor = {0.3f, 0.2f, 0.8f, 1.0f };
-
+        
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1));
+
+        std::dynamic_pointer_cast<Engine::OpenGLShader>(m_FlatColorShader)->Bind();
+        std::dynamic_pointer_cast<Engine::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3(m_SquareColor, "u_Color");
 
         for(int y = 0; y < 20; y++)
         {
             for(int x = 0; x < 20; x++)
             {
-
-                if (x %2 == 0)
-                    m_FlatColorShader->UploadUniformFloat4(redColor, "u_Color");
-                else
-                    m_FlatColorShader->UploadUniformFloat4(blueColor, "u_Color");
-
+                
                 glm::vec3 pos(x* 0.11f, y*0.11f, 0.0f );
                 glm::mat4 transform = glm::translate(glm::mat4(1.0), pos)*scale;    
 
@@ -204,6 +199,9 @@ public:
 
     void OnImGuiRender() override
     {
+        ImGui::Begin("Settings");
+        ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+        ImGui::End();
     }
 
     void OnEvent(Engine::Event& event) override
@@ -229,6 +227,8 @@ private:
 
         glm::vec3 m_SquarePosition;
         float m_SquareMoveSpeed = 1.0f;
+
+        glm::vec3 m_SquareColor = {0.2f, 0.3f, 0.8f};   
 
 };
 
