@@ -133,10 +133,28 @@ namespace Engine
         glUseProgram(0);
     }
 
+    void Shader::UploadUniformFloat2(const glm::vec2& values, const std::string& name)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform2f(location, values.x, values.y);
+    }
+
+    void Shader::UploadUniformFloat3(const glm::vec3& values, const std::string& name)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform3f(location, values.x, values.y, values.z);
+    }
+
+    void Shader::UploadUniformFloat4(const glm::vec4& values, const std::string& name)
+    {
+        GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+        glUniform4f(location, values.x, values.y, values.z, values.w);
+    }
+
+
     void Shader::UploadUniformMat4(const glm::mat4& matrix, const std::string& name)
     {
         GLint location = glGetUniformLocation(m_RendererID, name.c_str());
         glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix)); 
-
     } 
 }
