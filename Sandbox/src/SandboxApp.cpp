@@ -120,7 +120,7 @@ public:
                 color = vec4(v_Position*0.5 + 0.5, 0.1);
             }
 
-        )";
+        )"; 
 
 
         
@@ -129,24 +129,24 @@ public:
 
     }
     
-    void OnUpdate() override
+    void OnUpdate(Engine::Timestep ts) override
     {
 
         if(Engine::Input::IsKeyPressed(EG_KEY_LEFT))
-            m_CameraPosition.x += m_CameraMoveSpeed;
+            m_CameraPosition.x += m_CameraMoveSpeed*ts;
         else if(Engine::Input::IsKeyPressed(EG_KEY_RIGHT))
-            m_CameraPosition.x -= m_CameraMoveSpeed;
+            m_CameraPosition.x -= m_CameraMoveSpeed*ts;
 
         if(Engine::Input::IsKeyPressed(EG_KEY_UP))
-            m_CameraPosition.y += m_CameraMoveSpeed;
+            m_CameraPosition.y += m_CameraMoveSpeed*ts;
         else if(Engine::Input::IsKeyPressed(EG_KEY_DOWN))
-            m_CameraPosition.y -= m_CameraMoveSpeed;
+            m_CameraPosition.y -= m_CameraMoveSpeed*ts;
 
         if(Engine::Input::IsKeyPressed(EG_KEY_A))
-            m_CameraRotation += m_CameraRotationSpeed;
+            m_CameraRotation += m_CameraRotationSpeed*ts;
         
         if(Engine::Input::IsKeyPressed(EG_KEY_D))
-            m_CameraRotation -= m_CameraRotationSpeed;
+            m_CameraRotation -= m_CameraRotationSpeed*ts;
 
         Engine::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         Engine::RenderCommand::Clear();
@@ -185,10 +185,10 @@ private:
         Engine::OrthographicCamera m_Camera;
         
         glm::vec3 m_CameraPosition;
-        float m_CameraMoveSpeed = 0.1f;
+        float m_CameraMoveSpeed = 1.0f;
         
         float m_CameraRotation = 0.0f;
-        float m_CameraRotationSpeed = 2.0f;
+        float m_CameraRotationSpeed = 30.0f;
 
 };
 

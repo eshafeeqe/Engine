@@ -2,6 +2,7 @@
 #include "egpch.h"
 
 #include "Engine/Core.h"
+#include "Engine/Core/Timestep.h"
 #include "Engine/Events/Event.h"
 
 namespace Engine
@@ -16,7 +17,7 @@ namespace Engine
 
         virtual void OnAttach(){};
         virtual void OnDetach(){};
-        virtual void OnUpdate(){};
+        virtual void OnUpdate(Timestep ts){};
         virtual void OnEvent(Event& event){}; 
         virtual void OnImGuiRender(){}; 
 

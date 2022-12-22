@@ -10,6 +10,7 @@
 #include "Engine/ImGui/ImGuiLayer.h"
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/OrthographicCamera.h"
+#include "Engine/Core/Timestep.h"
 
 #include "Engine/Renderer/Buffer.h"
 #include "Engine/Renderer/VertexArray.h"
@@ -48,7 +49,10 @@ namespace Engine
                    
         bool m_Running = true;
         LayerStack m_LayerStack;
-    
+        Timestep m_LastFrameTime;
+        
+    private:
+
         static Application* m_Instance;
     
 

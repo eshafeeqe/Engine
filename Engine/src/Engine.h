@@ -4,14 +4,17 @@
 // For use by Engine applications
 
 #include "Engine/Application.h"
-#include "Engine/Core.h"
-#include "Engine/Log.h"
 #include "Engine/Layer.h"
-#include "Engine/ImGui/ImGuiLayer.h"
+#include "Engine/Log.h"
+
+#include "Engine/Core.h"
+#include "Engine/Core/Timestep.h"
 
 #include "Engine/Input.h"
 #include "Engine/KeyCodes.h"
 #include "Engine/MouseButtonCodes.h"
+
+#include "Engine/ImGui/ImGuiLayer.h"
 
 //------Renderer ----------------
 #include "Engine/Renderer/Renderer.h"
