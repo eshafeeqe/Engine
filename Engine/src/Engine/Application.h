@@ -27,10 +27,10 @@ namespace Engine
         void run();
         void onEvent(Event& e);
 
-        void PushLayer(std::shared_ptr<Layer>& layer);
-        void PushOverlay(std::shared_ptr<Layer>& overlay);
+        void PushLayer(Ref<Layer>& layer);
+        void PushOverlay(Ref<Layer>& overlay);
 
-        inline std::unique_ptr<Window>& GetWindow(){ return m_Window; }
+        inline Ref<Window>& GetWindow(){ return m_Window; }
 
         static Application* Get();
 
@@ -44,13 +44,13 @@ namespace Engine
         
     private:
 
-        std::unique_ptr<Window> m_Window;
-        std::shared_ptr<Layer> m_ImGuiLayer;
+        Ref<Window> m_Window;
+        Ref<Layer> m_ImGuiLayer;
                    
         bool m_Running = true;
         LayerStack m_LayerStack;
         Timestep m_LastFrameTime;
-        
+
     private:
 
         static Application* m_Instance;

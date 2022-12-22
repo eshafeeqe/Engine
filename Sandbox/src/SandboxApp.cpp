@@ -20,7 +20,7 @@ public:
              0.0f,  0.5f, 0.0f, 0.2f, 0.3f, 0.5f, 1.0f,
         };
 
-        std::shared_ptr<Engine::VertexBuffer> vertexBuffer;
+        Engine::Ref<Engine::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
 
         vertexBuffer->SetLayout({ 
@@ -32,7 +32,7 @@ public:
         m_VertexArray->AddVertexBuffer(vertexBuffer);
 
         uint indices[3] = {0, 1, 2};
-        std::shared_ptr<Engine::IndexBuffer> indexBuffer;
+        Engine::Ref<Engine::IndexBuffer> indexBuffer;
         indexBuffer.reset(Engine::IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
         m_SquareVA.reset(Engine::VertexArray::Create());
@@ -45,7 +45,7 @@ public:
 
         };
 
-        std::shared_ptr<Engine::VertexBuffer> squareVB; 
+        Engine::Ref<Engine::VertexBuffer> squareVB; 
         squareVB.reset(Engine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
         
         squareVB->SetLayout({ 
@@ -55,7 +55,7 @@ public:
         m_SquareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = {0, 1, 2, 2, 3, 0};
-        std::shared_ptr<Engine::IndexBuffer> squareIndexBuffer;
+        Engine::Ref<Engine::IndexBuffer> squareIndexBuffer;
         squareIndexBuffer.reset(Engine::IndexBuffer::Create(squareIndices, sizeof(squareVertices)/sizeof(squareVertices[0])));
         m_SquareVA->SetIndexBuffer(squareIndexBuffer);
 
@@ -211,11 +211,11 @@ public:
 
     
 private:
-        std::shared_ptr <Engine::Shader> m_Shader;
-        std::shared_ptr <Engine::Shader> m_FlatColorShader;
+        Engine::Ref <Engine::Shader> m_Shader;
+        Engine::Ref <Engine::Shader> m_FlatColorShader;
 
-        std::shared_ptr<Engine::VertexArray> m_VertexArray; 
-        std::shared_ptr<Engine::VertexArray> m_SquareVA;
+        Engine::Ref<Engine::VertexArray> m_VertexArray; 
+        Engine::Ref<Engine::VertexArray> m_SquareVA;
 
         Engine::OrthographicCamera m_Camera;
         
@@ -239,7 +239,7 @@ public:
 
     Sandbox()
     {
-        std::shared_ptr<Engine::Layer> example_layer = std::make_shared<ExampleLayer>();
+        Engine::Ref<Engine::Layer> example_layer = std::make_shared<ExampleLayer>();
         PushLayer(example_layer);
         
     }

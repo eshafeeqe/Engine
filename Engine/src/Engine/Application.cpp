@@ -75,13 +75,13 @@ namespace Engine
         return true;
     }
 
-    void Application::PushLayer(std::shared_ptr<Layer>& layer)
+    void Application::PushLayer(Ref<Layer>& layer)
     {
         m_LayerStack.PushLayer(layer);
         layer->OnAttach();
     }
 
-    void Application::PushOverlay(std::shared_ptr<Layer>& overlay)
+    void Application::PushOverlay(Ref<Layer>& overlay)
     {
         m_LayerStack.PushOverlay(overlay);
         overlay->OnAttach();

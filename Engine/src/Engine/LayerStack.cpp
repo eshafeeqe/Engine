@@ -9,18 +9,18 @@ namespace Engine {
     LayerStack::~LayerStack()
     {}
 
-    void LayerStack::PushLayer(std::shared_ptr<Layer>& layer)
+    void LayerStack::PushLayer(Ref<Layer>& layer)
     {
         m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
         m_LayerInsertIndex++;
     }
 
-    void LayerStack::PushOverlay(std::shared_ptr<Layer>& overlay)
+    void LayerStack::PushOverlay(Ref<Layer>& overlay)
     {
         m_Layers.emplace_back(overlay);
     }
     
-    void LayerStack::PopLayer(std::shared_ptr<Layer>& layer)
+    void LayerStack::PopLayer(Ref<Layer>& layer)
     {
         auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
         
@@ -31,7 +31,7 @@ namespace Engine {
         }
     }
 
-    void LayerStack::PopOverlay(std::shared_ptr<Layer>& overlay)
+    void LayerStack::PopOverlay(Ref<Layer>& overlay)
     {
         auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
         if(it != m_Layers.end())

@@ -41,7 +41,7 @@ namespace Engine
     private:
 
         GLFWwindow* m_Window;
-        std::unique_ptr<GraphicsContext> m_Context;
+        Ref<GraphicsContext> m_Context;
 
         struct WindowData
         {
