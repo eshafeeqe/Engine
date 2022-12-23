@@ -23,6 +23,7 @@ SET(GLFW_INCLUDE_PATH    "${PROJECT_SOURCE_DIR}/Engine/vendor/glfw/GLFW/include"
 SET(GLAD_INCLUDE_PATH    "${PROJECT_SOURCE_DIR}/Engine/vendor/Glad/include")
 SET(IMGUI_INCLUDE_PATH   "${PROJECT_SOURCE_DIR}/Engine/vendor/imgui/ImGui")
 SET(GLM_INCLUDE_PATH     "${PROJECT_SOURCE_DIR}/Engine/vendor/glm")
+SET(STB_IMAGE_INCLUDE_PATH     "${PROJECT_SOURCE_DIR}/Engine/vendor/stb_image")
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/glfw)
 add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/Glad)
@@ -30,9 +31,9 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/Engine/vendor/imgui)
 
 add_compile_definitions(GLFW_INCLUDE_NONE)
 
-FILE(GLOB_RECURSE ENGINE_SRCS "${ENGINE_SRCS_PATH}/*.cpp")
+FILE(GLOB_RECURSE ENGINE_SRCS "${ENGINE_SRCS_PATH}/*.cpp" "${PROJECT_SOURCE_DIR}/Engine/vendor/stb_image/*.cpp", "${PROJECT_SOURCE_DIR}/Engine/vendor/stb_image/*.h")
 
-ADD_LIBRARY(Engine SHARED ${ENGINE_SRCS} $<TARGET_OBJECTS:GLFW> 
+ADD_LIBRARY(Engine STATIC ${ENGINE_SRCS} $<TARGET_OBJECTS:GLFW> 
                                          $<TARGET_OBJECTS:Glad>
                                          $<TARGET_OBJECTS:ImGui>)
 
@@ -44,7 +45,8 @@ target_include_directories(Engine PUBLIC ${ENGINE_SRCS_PATH}
                                          ${GLFW_INCLUDE_PATH}
                                          ${GLAD_INCLUDE_PATH}
                                          ${IMGUI_INCLUDE_PATH}
-                                         ${GLM_INCLUDE_PATH})
+                                         ${GLM_INCLUDE_PATH}
+                                         ${STB_IMAGE_INCLUDE_PATH})
 
 target_link_libraries(Engine PUBLIC pthread dl)
 
@@ -59,3 +61,16 @@ target_link_libraries(Sandbox PUBLIC Engine)
 
 set_target_properties(Sandbox PROPERTIES
                       RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Sandbox)
+
+
+set(TEST_SRCS_PATH  "${PROJECT_SOURCE_DIR}/Test/")
+file(GLOB_RECURSE TEST_SRCS "${TEST_SRCS_PATH}/*.cpp" "${TEST_SRCS_PATH}/*.h")
+
+add_executable(Test ${TEST_SRCS})
+
+set_target_properties(Test PROPERTIES CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Test)
+target_include_directories(Test PUBLIC ${ENGINE_SRCS_PATH})
+target_link_libraries(Test PUBLIC Engine)
+
+set_target_properties(Test PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/Test)

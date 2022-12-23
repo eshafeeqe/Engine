@@ -12,7 +12,7 @@ namespace Engine{
     }
 
     void Renderer::EndScene()
-    {
+    { 
 
     }
 
