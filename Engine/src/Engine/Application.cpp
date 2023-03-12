@@ -16,6 +16,8 @@ namespace Engine
         EG_CORE_ASSERT(m_Instance, "Application already exists!");
         m_Window = Window::Create();
         m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));
+
+        Renderer::Init();
         m_ImGuiLayer = std::make_shared<ImGuiLayer>();
         PushOverlay(m_ImGuiLayer);
 

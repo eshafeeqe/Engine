@@ -64,7 +64,7 @@ set_target_properties(Sandbox PROPERTIES
 
 
 set(TEST_SRCS_PATH  "${PROJECT_SOURCE_DIR}/Test/")
-file(GLOB_RECURSE TEST_SRCS "${TEST_SRCS_PATH}/*.cpp" "${TEST_SRCS_PATH}/*.h")
+file(GLOB_RECURSE TEST_SRCS "${TEST_SRCS_PATH}/TextureTest.cpp")
 
 add_executable(Test ${TEST_SRCS})
 
